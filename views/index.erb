@@ -1,0 +1,74 @@
+<div id="content">
+ <center>
+ <p>
+    <div id="flash"><%= flash[:notice] if flash[:notice]%></div>
+  </p>
+ <br>
+ <br>
+ <p>Escriba código aceptado por la gramática en el área de texto y a continuación pulse en el botón <i>Parsear</i>.<br><br>Puede guardar un ejemplo de código escribiendo el nombre del archivo en el campo <i>Guardar</i> (como máximo se pueden almacenar 10 archivos).<br>Los archivos guardados se almacenarán en la barra horizontal encima del área de texto.<br>Puede eliminar cualquiera de los archivos guardados escribiendo el nombre en el campo <i>Eliminar</i>.</p>
+ <br>
+  <p>
+  <nav>
+  <ul>
+    <% programs.each do |p| %>
+      <li><a href="<%= p.name %>" <%=current?('/'+p.name)%>><%= p.name %></a></li>
+    <% end %>
+  </ul>
+  </nav>
+  <table>
+    <tr>
+      <tr>
+        <form action="/save" method="post">
+          <textarea id="input" name="input" 
+                    autofocus cols = "80" rows = "7">
+<%= source %>
+          </textarea>
+      </tr>
+      <tr>
+          <p class="loadfile">
+              <input type="file" id="examples" />
+          </p>
+      </tr>
+      <tr>
+      <td>
+          
+          <label for="saveas"><font color="444444"><b>Guardar (máx 10 archivos)</b></font></label>
+          <input id="saveas" type="text" name="fname" 
+                 title="name" pattern="\w+" />
+        </form>
+      </td>
+        
+      <td>
+        <form action="/delete" method="post"> 
+          
+          <label for="eliminar"><font color="444444"><b>Eliminar</b></font></label>
+          <input id="eliminar" type="text" name="fname" 
+                 title="name" pattern="\w+" />
+        </form>
+      </td>
+      </tr>
+    </tr>
+  </table>
+  <br><br> 
+  <button id="parse" type="button"><font color="444444"><b>Parsear</b></font></button>
+  </p>
+  <br>
+  <table id="tablaOUT"  style="overflow-y:scroll">
+    <th><font color="444444">Tokens</font></th>
+    <th>
+    <tr>
+    <td>
+      <div class="output">
+        <pre>
+<span id="output"></span> <!-- Output goes here! --> 
+        </pre>
+      </div>
+    </td>
+    </tr>
+    </th>
+  </table>
+  </center>
+</div>
+
+<script src="pl0.js"></script>
+<script src="main.js"></script>

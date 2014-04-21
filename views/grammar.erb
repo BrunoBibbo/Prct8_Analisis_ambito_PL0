@@ -1,0 +1,114 @@
+<script type="text/javascript" src="path-to-mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<br>
+Recuerde que una gramática (G) Jison es una cuaterna $G =(\Sigma,V,P,S)$.
+<ol>
+  <li>$\Sigma$ es el conjunto de terminales. <BR>
+  <li>$V$ es un conjunto (disjunto de $\Sigma$) que se denomina conjunto de 
+      <i>símbolos no terminales</i>,
+      <i>variables sintácticas</i> o <i>categorías gramáticales</i>,
+  <li>$P$ es un conjunto de pares de $V \times (V \cup \Sigma )^*$. En vez de escribir
+  un par usando la notación $(A, \alpha) \in P$ se escribe $A \leftarrow \alpha$.
+  Un elemento de $P$ se denomina <i>regla de análisis</i>. 
+  <li>Por último, $S$ es un símbolo del conjunto
+  $V$ que se denomina <i>expresión de arranque</i>.
+</ol>
+<BR>
+<ol>
+  <li> $\Sigma = \{ NUMBER, ID, COMPARISON, PUNTO, COMA, PCOMA, IF, THEN, ELSE, WHILE, DO, P, CALL, BEGIN, END, ODD, PROCEDURE, CONST, VAR, =, +, -, *, /, \text{^}, !, \%, LEFTPAR, RIGHTPAR, UMINUS \}$,
+  <li> $V = \{ prog, block, consts, constant, vars, var, procedure, expressions, statements, term, args, idnum, condition \}$
+  <li> <BR> $Producciones:$
+
+<p>
+<pre align = left>
+prog
+    : block PUNTO
+    ;
+
+block
+    : consts vars procedure statements
+    ;
+    
+consts
+    : /* empty */
+    | CONST constant
+    ;
+    
+constant
+    : ID '=' NUMBER PCOMA
+    | ID '=' NUMBER COMA constant
+    ;
+    
+vars
+    : /* empty */
+    | VAR var
+    ;
+    
+var
+    : ID PCOMA
+    | ID COMA var
+    ;
+    
+procedure
+    : /* empty */
+    | PROCEDURE ID LEFTPAR args RIGHTPAR PCOMA block PCOMA procedure
+    ;
+    
+expressions
+    : statements
+    | expressions PCOMA statements
+    ;
+
+statements
+    : ID '=' term
+    | P ID
+    | CALL ID LEFTPAR args RIGHTPAR
+    | IF condition THEN statements ELSE statements
+    | IF condition THEN statements
+    | BEGIN expressions PCOMA END
+    | WHILE condition DO statements
+    | term
+    ;
+
+term
+    : term '+' term
+    | term '-' term
+    | term '*' term
+    | term '/' term
+    | term '^' term
+    | term '!'
+    | term '%'
+    | '-' term %prec UMINUS
+    | NUMBER
+    | ID 
+    ;
+    
+args
+    : idnum args
+    | COMA idnum args
+    | /* empty */
+    ;
+    
+idnum
+    : NUMBER
+    | ID
+    ;
+    
+condition
+    : LEFTPAR ODD ID RIGHTPAR
+    | LEFTPAR idnum COMPARISON idnum RIGHTPAR
+    ;
+</pre>
+</p>
+<BR>
+<li> Símbolo de arranque: $prog$
+</ol>
+<BR>
+<BR>
+

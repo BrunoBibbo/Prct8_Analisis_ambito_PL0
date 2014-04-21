@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Analizador Jison PL0</title>
+    <link rel="icon" type="image/icon" href="images/favicon.ico" />
+    <link rel="stylesheet" href="/styles.css" type="text/css" media="screen" charset="utf-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+    <script src="tests/chai.js"></script>
+    <script src="tests/mocha.js"></script>
+    <script src="main.js"></script>
+    <script src="pl0.js"></script>
+    <script>mocha.setup('tdd')</script>
+    <script src="tests/tests.js"></script>
+
+  </head>
+  <body>
+    <center>
+    <h1>Analizador de la gramática del lenguaje PL0 usando Jison</h1><br><br>
+    <nav>
+      <ul>
+		<li> <a href="/"  title="Home" <%=current?("/")%>>Página principal</a> </li>
+        <li> <a href="/grammar"  title="Grammar" <%=current?("/grammar")%>>Gramática</a> </li>
+        <li> <a href="http://en.wikipedia.org/wiki/Recursive_descent_parser#Example_parser"   title="Wikipedia">Wikipedia-PL0</a> </li>
+        <li> <a href="http://zaach.github.io/jison/"  title="Jison">Jison</a> </li>
+        <li> <a href="http://datamapper.org/"  title="DataMapper">DataMapper</a> </li>
+        <li> <a href="https://github.com/alu0100597929/Prct6_Analizador_PL0_PEG.git"  title="Repo">Repositorio</a> </li>
+        <li> <a href="/tests"  title="Tests" <%=current?("/tests")%>>Tests</a> </li>
+        <br><br>
+        <li> <a href="/auth/google_oauth2"  title="Google" <%=current?("/auth/google_oauth2")%>>Sign in with Google</a> </li>
+        <li> <a href="/auth/facebook"  title="Facebook" <%=current?("/auth/facebook")%>>Sign in with Facebook</a> </li>
+      </ul>
+    </nav>
+    <%= yield %>
+    </center>
+  </body>
+</html>
+
