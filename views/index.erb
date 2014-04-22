@@ -5,7 +5,7 @@
   </p>
  <br>
  <br>
- <p>Escriba código aceptado por la gramática en el área de texto y a continuación pulse en el botón <i>Parsear</i>.<br><br>Puede guardar un ejemplo de código escribiendo el nombre del archivo en el campo <i>Guardar</i> (como máximo se pueden almacenar 10 archivos).<br>Los archivos guardados se almacenarán en la barra horizontal encima del área de texto.<br>Puede eliminar cualquiera de los archivos guardados escribiendo el nombre en el campo <i>Eliminar</i>.</p>
+ <p>Escriba código aceptado por la gramática en el área de texto y a continuación pulse en el botón <i>Parsear</i>.<br><br>Puede guardar un ejemplo de código escribiendo el nombre del archivo en el campo <i>Guardar</i>.<br>Para poder guardar o eliminar un archivo es necesario autenticarse en una de las redes disponibles (Google, Facebook).<br>Los archivos guardados se almacenarán en una tabla en la parte inferior de la página indicando el usuario que guardó el archivo y la red social a la que pertenece.<br>Puede eliminar cualquiera de los archivos guardados escribiendo el nombre en el campo <i>Eliminar</i>.</p>
  <br>
 
   <p>
@@ -28,7 +28,7 @@
       <tr>
       <td>
           
-          <label for="saveas"><font color="444444"><b>Guardar (máx 10 archivos)</b></font></label>
+          <label for="saveas"><font color="444444"><b>Guardar</b></font></label>
           <input id="saveas" type="text" name="fname" 
                  title="name" pattern="\w+" />
         </form>
@@ -68,6 +68,7 @@
 
 <nav>
   <table id="tablaArchivos">
+  <tr><th><FONT SIZE=5>Archivos guardados</FONT></th></tr>
   <tr><th>Nombre</th><th>Usuario</th><th>Red social</th></tr>
          
         <ul>
@@ -87,8 +88,7 @@
             </tr>
           <% end %>
         </ul>  
-  
-  </tr>
+
   </table>
   </nav>
 
