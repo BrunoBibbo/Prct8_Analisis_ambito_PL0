@@ -16,7 +16,7 @@ get '/auth/:provider/callback' do
   session[:name] = @auth['info'].name
   session[:image] = @auth['info'].image
   
-  flash[:notice] = %Q{<div class="success">Autenticado en #{@auth['info'].provider} como #{@auth['info'].name}.</div>}
+  flash[:notice] = %Q{<div class="success">Autenticado en #{@auth.provider} como #{@auth['info'].name}.</div>}
   redirect '/'
 end
 
