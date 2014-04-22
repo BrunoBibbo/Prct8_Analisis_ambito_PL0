@@ -53,14 +53,16 @@ post '/save' do
       c  = PL0Program.first(:name => name)
       if c
         c.source = params["input"]
+        c.user = session[:name]
+        c.provider = session[:provider]
         c.save
       else
-        if PL0Program.count < 10
-            c = PL0Program.new
-            c.name = params["fname"]
-            c.source = params["input"]
-            c.save
-        end
+        c = PL0Program.new
+        c.name = params["fname"]
+        c.source = params["input"]
+        c.user = session[:name]
+        c.provider = session[:provider]
+        c.save 
       end
 	  flash[:notice] = 
         %Q{<div class="success">Archivo guardado como #{c.name} por #{session[:name]}.</div>}
