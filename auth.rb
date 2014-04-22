@@ -15,8 +15,13 @@ get '/auth/:provider/callback' do
   session[:auth] = @auth = request.env['omniauth.auth']
   session[:name] = @auth['info'].name
   session[:image] = @auth['info'].image
+  if(@auth.provider == 'google_oauth2')
+    session[:provider] = 'Google'
+  else
+    session[:provider] = 'Facebook'
+  end
   
-  flash[:notice] = %Q{<div class="success">Autenticado en #{@auth.provider} como #{@auth['info'].name}.</div>}
+  flash[:notice] = %Q{<div class="success">Autenticado en #{session[:provider]} como #{session[:name]}.</div>}
   redirect '/'
 end
 
