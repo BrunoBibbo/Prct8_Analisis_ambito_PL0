@@ -38,7 +38,7 @@ get '/:selected?' do |selected|
   puts "selected = #{selected}"
   c  = PL0Program.first(:name => selected)
   source = if c then c.source else "a = 3-2-1" end
-  erb :index, :programas
+  erb :index,
       :locals => { :programs => programs, :source => source }
 
 end
