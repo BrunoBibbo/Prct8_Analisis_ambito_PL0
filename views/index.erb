@@ -69,10 +69,10 @@
 <nav>
   <table id="tablaArchivos">
   <tr><th>Nombre</th><th>Usuario</th><th>Red social</th></tr>
-    <tr>
-      
+         
         <ul>
           <% programs.each do |p| %>
+            <tr>
             <td>
               <li><a href="<%= p.name %>" <%=current?('/'+p.name)%>><%= p.name %></a></li>
             </td>
@@ -84,11 +84,10 @@
             <td>
               <p><%= p.provider %></p>
             </td>
-
+            </tr>
           <% end %>
         </ul>  
-
-    </tr>
+  
   </tr>
   </table>
   </nav>
