@@ -25,10 +25,6 @@ get '/tests' do
   erb :tests
 end
 
-get '/programas' do
-  erb :programas
-end
-
 get '/:selected?' do |selected|
   puts "*************@auth*****************"
   puts session[:name]
