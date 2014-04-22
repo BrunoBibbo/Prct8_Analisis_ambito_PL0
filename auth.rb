@@ -17,7 +17,8 @@ get '/auth/:provider/callback' do
   session[:image] = @auth['info'].image
   if(@auth.provider == 'google_oauth2')
     session[:provider] = 'Google'
-  else
+  end
+  if(@auth.provider == 'facebook')
     session[:provider] = 'Facebook'
   end
   
