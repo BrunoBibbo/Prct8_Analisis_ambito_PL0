@@ -7,15 +7,9 @@
  <br>
  <p>Escriba código aceptado por la gramática en el área de texto y a continuación pulse en el botón <i>Parsear</i>.<br><br>Puede guardar un ejemplo de código escribiendo el nombre del archivo en el campo <i>Guardar</i> (como máximo se pueden almacenar 10 archivos).<br>Los archivos guardados se almacenarán en la barra horizontal encima del área de texto.<br>Puede eliminar cualquiera de los archivos guardados escribiendo el nombre en el campo <i>Eliminar</i>.</p>
  <br>
- 
+
   <p>
-  <nav>
-  <ul>
-    <% programs.each do |p| %>
-      <li><a href="<%= p.name %>" <%=current?('/'+p.name)%>><%= p.name %></a></li>
-    <% end %>
-  </ul>
-  </nav>
+
 
   <table>
     <tr>
@@ -69,6 +63,29 @@
     </tr>
     </th>
   </table>
+
+
+<nav>
+  <table id="tablaArchivos">
+  <tr><th>Nombre</th><th>Usuario</th><th>Pertenece a</th></tr>
+    <tr>
+      <td>
+        <ul>
+          <% programs.each do |p| %>
+            <li><a href="<%= p.name %>" <%=current?('/'+p.name)%>><%= p.name %></a></li>
+          <% end %>
+        </ul>
+      </td>
+      <td>
+      </td>
+      <td>
+      </td>
+
+    </tr>
+  </tr>
+  </table>
+  </nav>
+  
   </center>
 </div>
 
