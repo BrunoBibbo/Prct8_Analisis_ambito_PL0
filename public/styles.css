@@ -37,7 +37,7 @@ nav {
     padding: 8px;
     background: #FFFFFF;
     border: 2px solid #333333;
-    color: white; }
+    color: #222222; }
     nav a:hover {
       background: #333333; }
 
@@ -106,3 +106,17 @@ nav a.current {
   width: 400px;
 }
 
+#google {
+  color: #FFFFFF;
+  background-color: #CC0011; 
+}
+
+#facebook {
+  color: #FFFFFF;
+  background-color: #0077BB; 
+}
+
+#archivo{
+  color: #222222;
+  background-color: #00DD22;
+}
