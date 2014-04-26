@@ -105,12 +105,13 @@ nav a.current {
   width: 400px;
 }
 
-.google {
+#google {
   color: #FFFFFF;
   background-color: #CC3333;
 }
 
-.facebook {
+#facebook {
   color: #FFFFFF;
   background-color: #0077CC;
 }
+
