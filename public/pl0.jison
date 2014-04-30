@@ -55,12 +55,12 @@ constant
     : ID '=' NUMBER PCOMA
 		{ 
 		  symbolTable.symbols[$1] = { Type: 'CONST', Value: $3 };
-		  $$ = { Type: $2, left: {ID: $1}, right: {Value: $3} }; 
+		  $$ = { Type: $2, left: {ID: $1}, right: {Value: $3}, declared_in: symbolTable.name  }; 
 		}
     | ID '=' NUMBER COMA constant
 		{ 
 		  symbolTable.symbols[$1] = { Type: 'CONST', Value: $3 }; 
-		  $$ = [{ Type: $2, left: {ID: $1}, right: {Value: $3} }].concat($5); 
+		  $$ = [{ Type: $2, left: {ID: $1}, right: {Value: $3}, declared_in: symbolTable.name  }].concat($5); 
 		} 
     ;
     
@@ -75,12 +75,12 @@ var
     : ID PCOMA
 		{ 
 		  symbolTable.symbols[$1] = {Type: 'VAR'};
-		  $$ = { Variable: $1 }; 
+		  $$ = { Variable: $1, declared_in: symbolTable.name };  
 		}
     | ID COMA var
 		{ 
 		  symbolTable.symbols[$1] = {Type: 'VAR' }; 
-		  $$ = [{ Variable: $1 }].concat($3); 
+		  $$ = [{ Variable: $1 , declared_in: symbolTable.name}].concat($3);  
 		}
     ;
 

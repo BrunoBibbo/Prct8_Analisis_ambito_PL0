@@ -95,12 +95,12 @@ case 4: this.$ = { Type: $$[$0-1], Constants: [$$[$0]] };
 break;
 case 5: 
 		  symbolTable.symbols[$$[$0-3]] = { Type: 'CONST', Value: $$[$0-1] };
-		  this.$ = { Type: $$[$0-2], left: {ID: $$[$0-3]}, right: {Value: $$[$0-1]} }; 
+		  this.$ = { Type: $$[$0-2], left: {ID: $$[$0-3]}, right: {Value: $$[$0-1]}, declared_in: symbolTable.name  }; 
 		
 break;
 case 6: 
 		  symbolTable.symbols[$$[$0-4]] = { Type: 'CONST', Value: $$[$0-2] }; 
-		  this.$ = [{ Type: $$[$0-3], left: {ID: $$[$0-4]}, right: {Value: $$[$0-2]} }].concat($$[$0]); 
+		  this.$ = [{ Type: $$[$0-3], left: {ID: $$[$0-4]}, right: {Value: $$[$0-2]}, declared_in: symbolTable.name  }].concat($$[$0]); 
 		
 break;
 case 7: this.$ = []; 
@@ -109,12 +109,12 @@ case 8: this.$ = { Type: $$[$0-1], Variables: [$$[$0]] };
 break;
 case 9: 
 		  symbolTable.symbols[$$[$0-1]] = {Type: 'VAR'};
-		  this.$ = { Variable: $$[$0-1] }; 
+		  this.$ = { Variable: $$[$0-1], declared_in: symbolTable.name };  
 		
 break;
 case 10: 
 		  symbolTable.symbols[$$[$0-2]] = {Type: 'VAR' }; 
-		  this.$ = [{ Variable: $$[$0-2] }].concat($$[$0]); 
+		  this.$ = [{ Variable: $$[$0-2] , declared_in: symbolTable.name}].concat($$[$0]);  
 		
 break;
 case 11: this.$ = []; 
