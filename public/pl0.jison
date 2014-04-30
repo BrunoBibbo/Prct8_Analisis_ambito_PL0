@@ -6,6 +6,12 @@
   var symbolTables = [{ name: 'Global', father: null, symbols: {} }];
   var scope = 0; 
   var symbolTable = symbolTables[scope];
+  
+  function nuevoAmbito(id) {
+    scope++; 
+    symbolTables.push({ name: id, father: symbolTable.name, symbols: {} });
+    symbolTable = symbolTables[scope];
+  }
 %}
 
 %right THEN ELSE
