@@ -66,8 +66,26 @@ procedures
     ;
     
 procedure
-    : PROCEDURE ID LEFTPAR args RIGHTPAR PCOMA block PCOMA procedure
+    : PROCEDURE nombre proc_na PCOMA block PCOMA procedure
 		{ $$ = { Type: $1, ID: $2, Arguments: $4, Block: $7 }; }
+    ;
+
+proc_na
+    : LEFTPAR args RIGHTPAR
+		{
+		  symbolTable.symbols[$1] = { Type: 'PROCEDURE', N_Args: $3.length };
+		  nuevoAmbito($1);
+		  
+		  for (i = 0; i < $3.length; i++)
+		    symbolTable.symbols[$3[i].Value] = { Type: 'VAR_ARG' };
+		    
+		  $$ = [$1, $3];
+		}
+    ;
+    
+nombre
+    : ID
+	{ $$ = $1; }
     ;
     
 expressions
