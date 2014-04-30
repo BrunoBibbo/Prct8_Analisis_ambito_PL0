@@ -108,7 +108,6 @@ proc_na
 		{
 		  symbolTable.symbols[$1] = { Type: 'PROCEDURE', N_Args: $3.length };
 		  nuevoAmbito($1);
-		  
 		  $$ = [$1, $3];
 		}
     ;
