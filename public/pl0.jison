@@ -174,6 +174,9 @@ proc_na
 		  symbolTable.symbols[$1] = { Type: 'PROCEDURE', N_Args: $3.length };
 		  nuevoAmbito($1);
 		  
+		  for (i = 0; i < $3.length; i++)
+		    symbolTable.symbols[$3[i].Value] = { Type: 'VAR_ARG' };
+		  
 		  $$ = [$1, $3];
 		}
     ;
