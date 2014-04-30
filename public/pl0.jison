@@ -92,24 +92,24 @@ procedures
 procedure
     : PROCEDURE proc_na PCOMA block PCOMA
 		{ 
-		  symbolTable.symbols[$2[0]] = { Type: 'PROCEDURE', N_Args: $2.length };
 		  $$ = { Type: $1, ID: $2[0], Arguments: $2[1], Block: $4 };
+		  $$['declared_in'] = symbolTable.name;
 		}
     ;
 
 proc_na
-    : LEFTPAR args RIGHTPAR
+    : nombre LEFTPAR args RIGHTPAR
 		{
+		  symbolTable.symbols[$1] = { Type: 'PROCEDURE', N_Args: $3.length };
+		  nuevoAmbito($1);
+  
 		  $$ = [$1, $3];
 		}
     ;
     
 nombre
     : ID
-	{ 
-	  nuevoAmbito($1);
-	  $$ = $1; 
-	}
+	{ $$ = $1; }
     ;
     
 expressions
