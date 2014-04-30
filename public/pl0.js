@@ -126,6 +126,7 @@ case 12:
 break;
 case 13: 
 		  this.$ = { Type: $$[$0-4], ID: $$[$0-3][0], Arguments: $$[$0-3][1], Block: $$[$0-1] };
+		  subirAmbito();
 		  this.$['declared_in'] = symbolTable.name;
 		
 break;
@@ -341,6 +342,11 @@ parse: function parse(input) {
   var symbolTables = [{ name: 'Global', father: null, symbols: {} }];
   var scope = 0; 
   var symbolTable = symbolTables[scope];
+  
+  function subirAmbito() {
+    scope--;
+    symbolTable = symbolTables[scope];
+  }
   
   function nuevoAmbito(id) {
     scope++; 
