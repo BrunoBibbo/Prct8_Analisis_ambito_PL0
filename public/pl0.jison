@@ -17,6 +17,19 @@
     symbolTables.push({ name: id, father: symbolTable.name, symbols: {} });
     symbolTable = symbolTables[scope];
   }
+  
+  function encontrarDeclarado(x) {
+    var f;
+    var s = scope;
+    do {
+      f = symbolTables[s].symbols[x];
+      if(f)
+	return;
+      s--;
+    } while (s >= 0 && !f);
+    
+    throw "Error! variable o constante '" + x + "' no declarada";
+  }
 %}
 
 %right THEN ELSE
@@ -130,7 +143,12 @@ expressions
 
 statements
     : ID '=' term
-        { $$ = { Type: $2, left: {ID: $1}, right: {Value :$3} }; }
+        { 
+	  encontrarDeclarado($1);
+	  if($3.Type == 'ID')
+		encontrarDeclarado($3.Value);
+	  $$ = { Type: $2, left: {ID: $1}, right: {Value :$3} }; 
+	}
     | P ID
         { $$ = { Type: $1, Identifiers: {ID: $2} }; }
     | CALL ID LEFTPAR args RIGHTPAR
