@@ -2,6 +2,12 @@
 %token NUMBER ID COMPARISON PUNTO COMA PCOMA IF THEN ELSE WHILE DO P CALL BEGIN END ODD PROCEDURE CONST VAR
 /* Asociacion de operadores y precedencia (de menor a mayor) */
 
+%{ 
+  var symbolTables = [{ name: 'Global', father: null, symbols: {} }];
+  var scope = 0; 
+  var symbolTable = symbolTables[scope];
+%}
+
 %right THEN ELSE
 %right '='
 %left '+' '-'
