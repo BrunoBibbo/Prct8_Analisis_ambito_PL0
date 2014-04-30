@@ -107,9 +107,15 @@ case 7: this.$ = [];
 break;
 case 8: this.$ = { Type: $$[$0-1], Variables: [$$[$0]] }; 
 break;
-case 9: this.$ = { Variable: $$[$0-1] }; 
+case 9: 
+		  symbolTable.symbols[$$[$0-1]] = {Type: 'VAR'};
+		  this.$ = { Variable: $$[$0-1] }; 
+		
 break;
-case 10: this.$ = [{ Variable: $$[$0-2] }].concat($$[$0]); 
+case 10: 
+		  symbolTable.symbols[$$[$0-2]] = {Type: 'VAR' }; 
+		  this.$ = [{ Variable: $$[$0-2] }].concat($$[$0]); 
+		
 break;
 case 11: this.$ = []; 
 break;

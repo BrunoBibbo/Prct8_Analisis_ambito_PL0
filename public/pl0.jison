@@ -62,9 +62,15 @@ vars
     
 var
     : ID PCOMA
-		{ $$ = { Variable: $1 }; }
+		{ 
+		  symbolTable.symbols[$1] = {Type: 'VAR'};
+		  $$ = { Variable: $1 }; 
+		}
     | ID COMA var
-		{ $$ = [{ Variable: $1 }].concat($3); }
+		{ 
+		  symbolTable.symbols[$1] = {Type: 'VAR' }; 
+		  $$ = [{ Variable: $1 }].concat($3); 
+		}
     ;
 
 procedures
