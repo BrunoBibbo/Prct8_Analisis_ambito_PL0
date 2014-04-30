@@ -125,6 +125,7 @@ case 12:
 		
 break;
 case 13: 
+		  symbolTable.symbols[$$[$0-3][0]] = { Type: 'PROCEDURE', N_Args: $$[$0-3].length };
 		  this.$ = { Type: $$[$0-4], ID: $$[$0-3][0], Arguments: $$[$0-3][1], Block: $$[$0-1] };
 		
 break;

@@ -86,6 +86,7 @@ procedures
 procedure
     : PROCEDURE proc_na PCOMA block PCOMA
 		{ 
+		  symbolTable.symbols[$2[0]] = { Type: 'PROCEDURE', N_Args: $2.length };
 		  $$ = { Type: $1, ID: $2[0], Arguments: $2[1], Block: $4 };
 		}
     ;
