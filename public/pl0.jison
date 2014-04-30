@@ -54,12 +54,20 @@ var
     | ID COMA var
 		{ $$ = [{ Variable: $1 }].concat($3); }
     ;
-    
-procedure
+
+procedures
     : /* empty */
 		{ $$ = []; }
-    | PROCEDURE ID LEFTPAR args RIGHTPAR PCOMA block PCOMA procedure
-		{ $$ = [{ Type: $1, ID: $2, Arguments: $4, Block: $7 }].concat($9); }
+    | procedure procedures
+		{
+		  $$ = [$1];
+		  if($2) $$ = $$.concat($2);
+		}
+    ;
+    
+procedure
+    : PROCEDURE ID LEFTPAR args RIGHTPAR PCOMA block PCOMA procedure
+		{ $$ = { Type: $1, ID: $2, Arguments: $4, Block: $7 }; }
     ;
     
 expressions
