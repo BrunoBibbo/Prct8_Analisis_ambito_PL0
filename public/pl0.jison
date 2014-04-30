@@ -18,6 +18,19 @@
     symbolTable = symbolTables[scope];
   }
   
+  function noIgualarConst(x) {
+    var f
+    var s = scope;
+    do {
+      f = symbolTables[s].symbols[x];
+      if(f && f['Type'] == 'CONST')
+	throw "Error! Se ha intentado igualar la constante '" + x + "' en el procedimiento: " + symbolTables[s].name;
+      s--;
+    } while (s >= 0 && !f);
+    
+    return;
+  }
+  
   function encontrarDeclarado(x) {
     var f;
     var s = scope;
@@ -145,6 +158,7 @@ statements
     : ID '=' term
         { 
 	  encontrarDeclarado($1);
+	  noIgualarConst($1);
 	  if($3.Type == 'ID')
 		encontrarDeclarado($3.Value);
 	  $$ = { Type: $2, left: {ID: $1}, right: {Value :$3} }; 

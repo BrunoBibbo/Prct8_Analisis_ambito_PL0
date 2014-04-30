@@ -148,6 +148,7 @@ case 17:
 break;
 case 18: 
 	  encontrarDeclarado($$[$0-2]);
+	  noIgualarConst($$[$0-2]);
 	  if($$[$0].Type == 'ID')
 		encontrarDeclarado($$[$0].Value);
 	  this.$ = { Type: $$[$0-1], left: {ID: $$[$0-2]}, right: {Value :$$[$0]} }; 
@@ -358,6 +359,19 @@ parse: function parse(input) {
     scope++; 
     symbolTables.push({ name: id, father: symbolTable.name, symbols: {} });
     symbolTable = symbolTables[scope];
+  }
+  
+  function noIgualarConst(x) {
+    var f
+    var s = scope;
+    do {
+      f = symbolTables[s].symbols[x];
+      if(f && f['Type'] == 'CONST')
+	throw "Error! Se ha intentado igualar la constante '" + x + "' en el procedimiento: " + symbolTables[s].name;
+      s--;
+    } while (s >= 0 && !f);
+    
+    return;
   }
   
   function encontrarDeclarado(x) {
