@@ -31,6 +31,19 @@
     throw "Error! el procedimiento '" + x + "' no ha sido declarado";
   }
   
+  function comprobarArgs(x, y) {
+    var f
+    var s = scope;
+    do {
+      f = symbolTables[s].symbols[x];
+      if(f && f['Type'] == 'PROCEDURE' && symbolTables[s].symbols[x]['N_Args'] != y)
+	throw "Error! Los argumentos del procedimiento '" + x + "' son incorrectos";
+      s--;
+    } while (s >= 0 && !f);
+    
+    return;
+  }
+  
   function noIgualarProc(x) {
     var f
     var s = scope;
@@ -195,6 +208,7 @@ statements
     | CALL ID LEFTPAR args RIGHTPAR
 	{ 
 	  procDeclarado($2);
+	  comprobarArgs($2, $4.length);
 	  $$ = { Type: $1, Procedure: {ID: $2, Arguments: $4} };
 	}
     | IF condition THEN statements ELSE statements

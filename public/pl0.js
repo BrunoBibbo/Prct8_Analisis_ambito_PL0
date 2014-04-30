@@ -158,10 +158,9 @@ break;
 case 19: this.$ = { Type: $$[$0-1], Identifiers: {ID: $$[$0]} }; 
 break;
 case 20: 
-	  if($$[$0-1])
-	    this.$ = { Type: $$[$0-4], Procedure: {ID: $$[$0-3], Arguments: $$[$0-1]} };
-	  else
-	    this.$ = { Type: $$[$0-4], Procedure: {ID: $$[$0-3]} }; 
+	  procDeclarado($$[$0-3]);
+	  comprobarArgs($$[$0-3], $$[$0-1].length);
+	  this.$ = { Type: $$[$0-4], Procedure: {ID: $$[$0-3], Arguments: $$[$0-1]} };
 	
 break;
 case 21: this.$ = { Type: $$[$0-5]+$$[$0-1], left: {Condition: $$[$0-4]}, center: {Statement: $$[$0-2]}, right: {Statement: $$[$0]} }; 
@@ -360,6 +359,32 @@ parse: function parse(input) {
     scope++; 
     symbolTables.push({ name: id, father: symbolTable.name, symbols: {} });
     symbolTable = symbolTables[scope];
+  }
+  
+  function procDeclarado(x) {
+    var f;
+    var s = scope;
+    do {
+      f = symbolTables[s].symbols[x];
+      if(f)
+	return;
+      s--;
+    } while (s >= 0 && !f);
+    
+    throw "Error! el procedimiento '" + x + "' no ha sido declarado";
+  }
+  
+  function comprobarArgs(x, y) {
+    var f
+    var s = scope;
+    do {
+      f = symbolTables[s].symbols[x];
+      if(f && f['Type'] == 'PROCEDURE' && symbolTables[s].symbols[x]['N_Args'] != y)
+	throw "Error! Los argumentos del procedimiento '" + x + "' son incorrectos";
+      s--;
+    } while (s >= 0 && !f);
+    
+    return;
   }
   
   function noIgualarProc(x) {
