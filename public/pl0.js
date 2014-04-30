@@ -133,7 +133,10 @@ case 14:
 		  this.$ = [$$[$0-2], $$[$0]];
 		
 break;
-case 15: this.$ = $$[$0]; 
+case 15: 
+	  nuevoAmbito($$[$0]);
+	  this.$ = $$[$0]; 
+	
 break;
 case 16: this.$ = (typeof $$[$0] === 'undefined')? [] : [ $$[$0] ]; 
 break;

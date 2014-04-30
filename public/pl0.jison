@@ -106,7 +106,10 @@ proc_na
     
 nombre
     : ID
-	{ $$ = $1; }
+	{ 
+	  nuevoAmbito($1);
+	  $$ = $1; 
+	}
     ;
     
 expressions
