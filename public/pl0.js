@@ -134,6 +134,9 @@ case 14:
 		  symbolTable.symbols[$$[$0-3]] = { Type: 'PROCEDURE', N_Args: $$[$0-1].length };
 		  nuevoAmbito($$[$0-3]);
 		  
+		  for (i = 0; i < $$[$0-1].length; i++)
+		    symbolTable.symbols[$$[$0-1][i].Value] = { Type: 'VAR_ARG' };
+		  
 		  this.$ = [$$[$0-3], $$[$0-1]];
 		
 break;
@@ -150,8 +153,10 @@ case 18:
 	  encontrarDeclarado($$[$0-2]);
 	  noIgualarConst($$[$0-2]);
 	  noIgualarProc($$[$0-2]);
+	  
 	  if($$[$0].Type == 'ID')
 		encontrarDeclarado($$[$0].Value);
+		
 	  this.$ = { Type: $$[$0-1], left: {ID: $$[$0-2]}, right: {Value :$$[$0]} }; 
 	
 break;

@@ -202,8 +202,10 @@ statements
 	  encontrarDeclarado($1);
 	  noIgualarConst($1);
 	  noIgualarProc($1);
+	  
 	  if($3.Type == 'ID')
 		encontrarDeclarado($3.Value);
+		
 	  $$ = { Type: $2, left: {ID: $1}, right: {Value :$3} }; 
 	}
     | P ID
