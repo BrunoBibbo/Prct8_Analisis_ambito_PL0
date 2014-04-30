@@ -42,9 +42,15 @@ consts
     
 constant
     : ID '=' NUMBER PCOMA
-		{ $$ = { Type: $2, left: {ID: $1}, right: {Value: $3} }; }
+		{ 
+		  symbolTable.symbols[$1] = { Type: 'CONST', Value: $3 };
+		  $$ = { Type: $2, left: {ID: $1}, right: {Value: $3} }; 
+		}
     | ID '=' NUMBER COMA constant
-		{ $$ = [{ Type: $2, left: {ID: $1}, right: {Value: $3} }].concat($5); } 
+		{ 
+		  symbolTable.symbols[$1] = { Type: 'CONST', Value: $3 }; 
+		  $$ = [{ Type: $2, left: {ID: $1}, right: {Value: $3} }].concat($5); 
+		} 
     ;
     
 vars

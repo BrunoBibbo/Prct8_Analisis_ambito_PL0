@@ -93,9 +93,15 @@ case 3: this.$ = [];
 break;
 case 4: this.$ = { Type: $$[$0-1], Constants: [$$[$0]] }; 
 break;
-case 5: this.$ = { Type: $$[$0-2], left: {ID: $$[$0-3]}, right: {Value: $$[$0-1]} }; 
+case 5: 
+		  symbolTable.symbols[$$[$0-3]] = { Type: 'CONST', Value: $$[$0-1] };
+		  this.$ = { Type: $$[$0-2], left: {ID: $$[$0-3]}, right: {Value: $$[$0-1]} }; 
+		
 break;
-case 6: this.$ = [{ Type: $$[$0-3], left: {ID: $$[$0-4]}, right: {Value: $$[$0-2]} }].concat($$[$0]); 
+case 6: 
+		  symbolTable.symbols[$$[$0-4]] = { Type: 'CONST', Value: $$[$0-2] }; 
+		  this.$ = [{ Type: $$[$0-3], left: {ID: $$[$0-4]}, right: {Value: $$[$0-2]} }].concat($$[$0]); 
+		
 break;
 case 7: this.$ = []; 
 break;
