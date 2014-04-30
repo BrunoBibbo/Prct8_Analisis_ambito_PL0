@@ -133,6 +133,7 @@ break;
 case 14:
 		  symbolTable.symbols[$$[$0-3]] = { Type: 'PROCEDURE', N_Args: $$[$0-1].length };
 		  nuevoAmbito($$[$0-3]);
+		  
 		  this.$ = [$$[$0-3], $$[$0-1]];
 		
 break;
