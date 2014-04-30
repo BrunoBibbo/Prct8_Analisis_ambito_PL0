@@ -18,6 +18,19 @@
     symbolTable = symbolTables[scope];
   }
   
+  function procDeclarado(x) {
+    var f;
+    var s = scope;
+    do {
+      f = symbolTables[s].symbols[x];
+      if(f)
+	return;
+      s--;
+    } while (s >= 0 && !f);
+    
+    throw "Error! el procedimiento '" + x + "' no ha sido declarado";
+  }
+  
   function noIgualarProc(x) {
     var f
     var s = scope;
@@ -181,10 +194,8 @@ statements
         { $$ = { Type: $1, Identifiers: {ID: $2} }; }
     | CALL ID LEFTPAR args RIGHTPAR
 	{ 
-	  if($4)
-	    $$ = { Type: $1, Procedure: {ID: $2, Arguments: $4} };
-	  else
-	    $$ = { Type: $1, Procedure: {ID: $2} }; 
+	  procDeclarado($2);
+	  $$ = { Type: $1, Procedure: {ID: $2, Arguments: $4} };
 	}
     | IF condition THEN statements ELSE statements
 		{ $$ = { Type: $1+$5, left: {Condition: $2}, center: {Statement: $4}, right: {Statement: $6} }; }
