@@ -17,13 +17,13 @@
 prog
     : block PUNTO
         { 
-          $$ = $1; 
+          $$ = { Type: 'Program', Program: $1 }; 
           return [$$];
         }
     ;
 
 block
-    : consts vars procedure statements
+    : consts vars procedures statements
 		{ $$ = { Type: 'BLOCK', CONTENT: {CONSTS: $1, VARS: $2, PROCEDURE: $3, STATEMENTS: $4} }; }
     ;
     
@@ -66,9 +66,9 @@ expressions
     : statements  
         { $$ = (typeof $1 === 'undefined')? [] : [ $1 ]; }
     | expressions PCOMA statements
-        { $$ = $1;
+        { 
+	  $$ = $1;
           if ($3) $$.push($3); 
-          console.log($$);
         }
     ;
 
