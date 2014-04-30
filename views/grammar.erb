@@ -22,7 +22,7 @@ Recuerde que una gramática (G) Jison es una cuaterna $G =(\Sigma,V,P,S)$.
 <BR>
 <ol>
   <li> $\Sigma = \{ NUMBER, ID, COMPARISON, PUNTO, COMA, PCOMA, IF, THEN, ELSE, WHILE, DO, P, CALL, BEGIN, END, ODD, PROCEDURE, CONST, VAR, =, +, -, *, /, \text{^}, !, \%, LEFTPAR, RIGHTPAR, UMINUS \}$,
-  <li> $V = \{ prog, block, consts, constant, vars, var, procedure, expressions, statements, term, args, idnum, condition \}$
+  <li> $V = \{ prog, block, consts, constant, vars, var, procedures, procedure, proc_na, nombre, expressions, statements, term, args, idnum, condition \}$
   <li> <BR> $Producciones:$
 
 <p>
@@ -32,7 +32,7 @@ prog
     ;
 
 block
-    : consts vars procedure statements
+    : consts vars procedures statements
     ;
     
 consts
@@ -55,9 +55,21 @@ var
     | ID COMA var
     ;
     
-procedure
+procedures
     : /* empty */
-    | PROCEDURE ID LEFTPAR args RIGHTPAR PCOMA block PCOMA procedure
+    | procedure procedures
+    ;
+    
+procedure
+    : PROCEDURE proc_na PCOMA block PCOMA
+    ;
+
+proc_na
+    : nombre LEFTPAR args RIGHTPAR
+    ;
+    
+nombre
+    : ID
     ;
     
 expressions
