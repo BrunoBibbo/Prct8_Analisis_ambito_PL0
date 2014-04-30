@@ -97,7 +97,7 @@ procedures
 procedure
     : PROCEDURE proc_na PCOMA block PCOMA
 		{ 
-		  $$ = { Type: $1, ID: $2[0], Arguments: $2[1], Block: $4 };
+		  $$ = { Type: $1, ID: $2[0], Arguments: $2[1], Block: $4, SymbolTable: symbolTables.pop() };
 		  subirAmbito();
 		  $$['declared_in'] = symbolTable.name;
 		}

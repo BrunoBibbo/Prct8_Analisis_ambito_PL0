@@ -125,7 +125,7 @@ case 12:
 		
 break;
 case 13: 
-		  this.$ = { Type: $$[$0-4], ID: $$[$0-3][0], Arguments: $$[$0-3][1], Block: $$[$0-1] };
+		  this.$ = { Type: $$[$0-4], ID: $$[$0-3][0], Arguments: $$[$0-3][1], Block: $$[$0-1], SymbolTable: symbolTables.pop() };
 		  subirAmbito();
 		  this.$['declared_in'] = symbolTable.name;
 		
