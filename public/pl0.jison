@@ -7,6 +7,11 @@
   var scope = 0; 
   var symbolTable = symbolTables[scope];
   
+  function subirAmbito() {
+    scope--;
+    symbolTable = symbolTables[scope];
+  }
+  
   function nuevoAmbito(id) {
     scope++; 
     symbolTables.push({ name: id, father: symbolTable.name, symbols: {} });
