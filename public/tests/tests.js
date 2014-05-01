@@ -70,13 +70,13 @@ var assert = chai.assert;
   });
   
   test('Procedure - Sin argumentos: ', function(){  
-    var input = pl0.parse("PROCEDURE a(); b = 5; CALL a().");
-    assert.equal('[{"Type":"Program","Program":{"Type":"BLOCK","CONTENT":{"CONSTS":[],"VARS":[],"PROCEDURE":[{"Type":"PROCEDURE","ID":"a","Arguments":[],"Block":{"Type":"BLOCK","CONTENT":{"CONSTS":[],"VARS":[],"PROCEDURE":[],"STATEMENTS":{"Type":"=","left":{"ID":"b"},"right":{"Value":{"Type":"NUMBER","Value":"5"}}}}},"SymbolTable":{"name":"a","father":"Global","symbols":{}},"declared_in":"Global"}],"STATEMENTS":{"Type":"CALL","Procedure":{"ID":"a","Arguments":[]}}}}}]', JSON.stringify(input));
+    var input = pl0.parse("VAR b; PROCEDURE a(); b = 5; CALL a().");
+    assert.equal('[{"Type":"Program","Program":{"Type":"BLOCK","CONTENT":{"CONSTS":[],"VARS":{"Type":"VAR","Variables":[{"Variable":"b","declared_in":"Global"}]},"PROCEDURE":[{"Type":"PROCEDURE","ID":"a","Arguments":[],"Block":{"Type":"BLOCK","CONTENT":{"CONSTS":[],"VARS":[],"PROCEDURE":[],"STATEMENTS":{"Type":"=","left":{"ID":"b"},"right":{"Value":{"Type":"NUMBER","Value":"5"}}}}},"SymbolTable":{"name":"a","father":"Global","symbols":{}},"declared_in":"Global"}],"STATEMENTS":{"Type":"CALL","Procedure":{"ID":"a","Arguments":[]}}}}}]', JSON.stringify(input));
   });
   
   test('Procedure - Con argumentos: ', function(){  
-    var input = pl0.parse("PROCEDURE a(c, d, e); b = 5; CALL a(c, d, e).");
-    assert.equal('[{"Type":"Program","Program":{"Type":"BLOCK","CONTENT":{"CONSTS":[],"VARS":[],"PROCEDURE":[{"Type":"PROCEDURE","ID":"a","Arguments":[{"Type":"ID","Value":"c"},{"Type":"ID","Value":"d"},{"Type":"ID","Value":"e"}],"Block":{"Type":"BLOCK","CONTENT":{"CONSTS":[],"VARS":[],"PROCEDURE":[],"STATEMENTS":{"Type":"=","left":{"ID":"b"},"right":{"Value":{"Type":"NUMBER","Value":"5"}}}}},"SymbolTable":{"name":"a","father":"Global","symbols":{"c":{"Type":"VAR_ARG"},"d":{"Type":"VAR_ARG"},"e":{"Type":"VAR_ARG"}}},"declared_in":"Global"}],"STATEMENTS":{"Type":"CALL","Procedure":{"ID":"a","Arguments":[{"Type":"ID","Value":"c"},{"Type":"ID","Value":"d"},{"Type":"ID","Value":"e"}]}}}}}]', JSON.stringify(input));
+    var input = pl0.parse("VAR b, c, d, e; PROCEDURE a(c, d, e); b = 5; CALL a(c, d, e).");
+    assert.equal('[{"Type":"Program","Program":{"Type":"BLOCK","CONTENT":{"CONSTS":[],"VARS":{"Type":"VAR","Variables":[[{"Variable":"b","declared_in":"Global"},{"Variable":"c","declared_in":"Global"},{"Variable":"d","declared_in":"Global"},{"Variable":"e","declared_in":"Global"}]]},"PROCEDURE":[{"Type":"PROCEDURE","ID":"a","Arguments":[{"Type":"ID","Value":"c"},{"Type":"ID","Value":"d"},{"Type":"ID","Value":"e"}],"Block":{"Type":"BLOCK","CONTENT":{"CONSTS":[],"VARS":[],"PROCEDURE":[],"STATEMENTS":{"Type":"=","left":{"ID":"b"},"right":{"Value":{"Type":"NUMBER","Value":"5"}}}}},"SymbolTable":{"name":"a","father":"Global","symbols":{"c":{"Type":"VAR_ARG"},"d":{"Type":"VAR_ARG"},"e":{"Type":"VAR_ARG"}}},"declared_in":"Global"}],"STATEMENTS":{"Type":"CALL","Procedure":{"ID":"a","Arguments":[{"Type":"ID","Value":"c"},{"Type":"ID","Value":"d"},{"Type":"ID","Value":"e"}]}}}}}]', JSON.stringify(input));
   });
   
  });
@@ -92,8 +92,19 @@ var assert = chai.assert;
   
  suite('Pruebas de error', function() {
  
-  test('Error de Sintaxis: ', function(){
-    assert.throws(function() { pl0.parse("a = 2;"); }, 'Error! Se ha intentado igualar la constante \'a\' en el procedimiento: Global');
+  test('Error de Constante: ', function(){
+    assert.throws(function() { pl0.parse("CONST a; a = 2."); }, 'Parse error on line 1:\nCONST a; a = 2.\n-------^\nExpecting \'=\', got \'PCOMA\'');
+
   });
-  
+
+  test('Error de Procedimiento: ', function(){
+    assert.throws(function() { pl0.parse("CALL tutu();"); }, 'Error! el procedimiento \'tutu\' no ha sido declarado');
+
+  });
+
+  test('Error de Argumentos: ', function(){
+    assert.throws(function() { pl0.parse("VAR x; PROCEDURE multiply(x); CALL multiply();"); }, 'Error! Los argumentos del procedimiento \'multiply\' son incorrectos');
+
+  });  
+
  });
